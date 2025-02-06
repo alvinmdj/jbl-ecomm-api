@@ -9,6 +9,7 @@ import {
 } from "@/modules/products/repository";
 import { CreateProductRequest } from "@/modules/products/types";
 import { getDummyProducts } from "@/utils/dummy-products";
+import { PRODUCT_NOT_FOUND, SKU_ALREADY_EXISTS } from "@/utils/errors";
 
 export async function getProductsUsecase(limit: number, page: number) {
   const offset = (page - 1) * limit;
@@ -33,10 +34,26 @@ export async function updateProductUsecase(
   sku: string,
   request: CreateProductRequest
 ) {
+  const product = await getProductBySKUUsecase(sku);
+
+  if (!product) {
+    throw new Error(PRODUCT_NOT_FOUND);
+  }
+
+  const newProduct = await getProductBySKUUsecase(request.sku);
+  if (newProduct && newProduct.sku !== sku) {
+    throw new Error(SKU_ALREADY_EXISTS);
+  }
+
   return updateProduct(sku, request);
 }
 
 export async function deleteProductUsecase(sku: string) {
+  const existingProduct = await getProductBySKUUsecase(sku);
+  if (!existingProduct) {
+    throw new Error(PRODUCT_NOT_FOUND);
+  }
+
   return deleteProduct(sku);
 }
 

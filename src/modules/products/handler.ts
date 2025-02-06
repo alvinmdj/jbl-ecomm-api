@@ -10,6 +10,7 @@ import {
   updateProductUsecase,
 } from "@/modules/products/usecase";
 import { createProductBodySchema } from "@/modules/products/schema";
+
 import { createAPIResponse } from "@/utils/response";
 import {
   calculateTotalPage,
@@ -17,6 +18,7 @@ import {
   DEFAULT_PAGE_SIZE,
   Pagination,
 } from "@/utils/pagination";
+import { SKU_ALREADY_EXISTS } from "@/utils/errors";
 
 export async function getProductsHandler(
   request: FastifyRequest<{ Querystring: { limit?: number; page?: number } }>,
@@ -25,21 +27,16 @@ export async function getProductsHandler(
   const limit = request.query.limit || DEFAULT_PAGE_SIZE;
   const page = request.query.page || DEFAULT_PAGE;
 
-  try {
-    const { products, totalRecords } = await getProductsUsecase(limit, page);
+  const { products, totalRecords } = await getProductsUsecase(limit, page);
 
-    const pagination: Pagination = {
-      page,
-      limit,
-      totalRecords,
-      totalPages: calculateTotalPage(totalRecords, limit),
-    };
+  const pagination: Pagination = {
+    page,
+    limit,
+    totalRecords,
+    totalPages: calculateTotalPage(totalRecords, limit),
+  };
 
-    return reply.send(createAPIResponse({ data: products, pagination }));
-  } catch (error) {
-    console.error(error, "failed to get list of products");
-    return reply.code(500).send({ message: "failed to get list of products" });
-  }
+  return reply.send(createAPIResponse({ data: products, pagination }));
 }
 
 export async function getProductBySKUHandler(
@@ -48,17 +45,12 @@ export async function getProductBySKUHandler(
 ) {
   const { sku } = request.params;
 
-  try {
-    const product = await getProductBySKUUsecase(sku);
-    if (!product) {
-      return reply.code(404).send({ message: "product not found" });
-    }
-
-    return reply.send(createAPIResponse({ data: product }));
-  } catch (error) {
-    console.error(error, "failed to get product by SKU");
-    return reply.code(500).send({ message: "failed to get product by SKU" });
+  const product = await getProductBySKUUsecase(sku);
+  if (!product) {
+    return reply.code(404).send({ message: "product not found" });
   }
+
+  return reply.send(createAPIResponse({ data: product }));
 }
 
 export async function createProductHandler(
@@ -69,26 +61,21 @@ export async function createProductHandler(
 ) {
   const { sku } = request.body;
 
-  try {
-    const existingProduct = await getProductBySKUUsecase(sku);
-    if (existingProduct) {
-      return reply.code(400).send({ message: "SKU already exists" });
-    }
-
-    const validate = createProductBodySchema.safeParse(request.body);
-    if (!validate.success) {
-      return reply.code(400).send({
-        message: "invalid request body",
-        errors: validate.error.format(),
-      });
-    }
-
-    const product = await createProductUsecase(request.body);
-    return reply.code(201).send(createAPIResponse({ data: product }));
-  } catch (error) {
-    console.error(error, "failed to create product");
-    return reply.code(500).send({ message: "failed to create product" });
+  const existingProduct = await getProductBySKUUsecase(sku);
+  if (existingProduct) {
+    return reply.code(400).send({ message: SKU_ALREADY_EXISTS });
   }
+
+  const validate = createProductBodySchema.safeParse(request.body);
+  if (!validate.success) {
+    return reply.code(400).send({
+      message: "invalid request body",
+      errors: validate.error.format(),
+    });
+  }
+
+  const product = await createProductUsecase(request.body);
+  return reply.code(201).send(createAPIResponse({ data: product }));
 }
 
 export async function updateProductHandler(
@@ -98,28 +85,19 @@ export async function updateProductHandler(
   }>,
   reply: FastifyReply
 ) {
-  const { sku } = request.params;
-
-  try {
-    const existingProduct = await getProductBySKUUsecase(sku);
-    if (!existingProduct) {
-      return reply.code(404).send({ message: "product not found" });
-    }
-
-    const validate = createProductBodySchema.safeParse(request.body);
-    if (!validate.success) {
-      return reply.code(400).send({
-        message: "invalid request body",
-        errors: validate.error.format(),
-      });
-    }
-
-    const updatedProduct = await updateProductUsecase(sku, request.body);
-    return reply.send(createAPIResponse({ data: updatedProduct }));
-  } catch (error) {
-    console.error(error, "failed to update product");
-    return reply.code(500).send({ message: "failed to update product" });
+  const validate = createProductBodySchema.safeParse(request.body);
+  if (!validate.success) {
+    return reply.code(400).send({
+      message: "invalid request body",
+      errors: validate.error.format(),
+    });
   }
+
+  const updatedProduct = await updateProductUsecase(
+    request.params.sku,
+    request.body
+  );
+  return reply.send(createAPIResponse({ data: updatedProduct }));
 }
 
 export async function deleteProductHandler(
@@ -127,32 +105,14 @@ export async function deleteProductHandler(
   reply: FastifyReply
 ) {
   const { sku } = request.params;
-
-  try {
-    const existingProduct = await getProductBySKUUsecase(sku);
-    if (!existingProduct) {
-      return reply.code(404).send({ message: "product not found" });
-    }
-
-    await deleteProductUsecase(sku);
-    return reply.send({ message: "product deleted successfully" });
-  } catch (error) {
-    console.error(error, "failed to delete product");
-    return reply.code(500).send({ message: "failed to delete product" });
-  }
+  await deleteProductUsecase(sku);
+  return reply.send({ message: "product deleted successfully" });
 }
 
 export async function fetchAndSaveProductsHandler(
   _: FastifyRequest,
   reply: FastifyReply
 ) {
-  try {
-    const result = await fetchAndSaveProductsUsecase();
-    return reply.send(result);
-  } catch (error) {
-    console.error(error, "failed to fetch and save products");
-    return reply
-      .code(500)
-      .send({ message: "failed to fetch and save products" });
-  }
+  const result = await fetchAndSaveProductsUsecase();
+  return reply.send(result);
 }
