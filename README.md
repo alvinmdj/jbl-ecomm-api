@@ -1,32 +1,20 @@
 # Ecomm API
 
-## Dependencies
-
-```sh
-npm i fastify dotenv
-
-# dev deps
-npm i typescript tsx -D
-```
-
-## Setup
-
-```sh
-# initialize git
-git init
-
-# initialize npm
-npm init -y
-
-# initialize tsconfig
-npx tsc --init
-```
-
 ## Run app
+
+- install dependencies
+
+```sh
+npm install
+```
 
 - create & fill .env (using .env.example)
 
-- run postgresql with docker
+```sh
+cp .env.example .env
+```
+
+- run postgresql (using docker)
 
 ```sh
 # build & migrate
@@ -39,8 +27,21 @@ docker-compose up -d
 docker exec -it db-postgres psql -U postgres -d jbl_ecomm_db -c "\dt"
 ```
 
-- run app (dev mode)
+- run app (watch)
 
 ```sh
 npm run dev
+```
+
+## Setup (personal notes)
+
+```sh
+# initialize git
+git init
+
+# initialize npm
+npm init -y
+
+# initialize tsconfig
+npx tsc --init
 ```
