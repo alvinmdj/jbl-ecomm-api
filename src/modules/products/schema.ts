@@ -6,5 +6,4 @@ export const createProductBodySchema = z.object({
   image: z.string().min(1, "Image must not be empty"),
   price: z.number().positive("Price must be greater than 0"),
   description: z.string().optional(),
-  stock: z.number().optional(),
 });

@@ -4,13 +4,11 @@ CREATE TABLE IF NOT EXISTS products (
   "sku" TEXT UNIQUE NOT NULL,
   "image" TEXT NOT NULL,
   "price" DECIMAL NOT NULL,
-  "description" TEXT,
-  "stock" BIGINT DEFAULT 0
+  "description" TEXT
 );
 CREATE TABLE IF NOT EXISTS adjustment_transactions (
   "id" SERIAL PRIMARY KEY,
   "sku" TEXT REFERENCES products(sku) ON DELETE CASCADE,
   "qty" BIGINT NOT NULL,
-  "amount" DECIMAL NOT NULL,
   "created_at" TIMESTAMP DEFAULT NOW()
 );

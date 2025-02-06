@@ -1,13 +1,14 @@
 import {
   createProduct,
+  createProductWithTransaction,
   deleteProduct,
-  getDummyProducts,
   getProductBySKU,
   getProducts,
   getTotalProductCount,
   updateProduct,
 } from "@/modules/products/repository";
 import { CreateProductRequest } from "@/modules/products/types";
+import { getDummyProducts } from "@/utils/dummy-products";
 
 export async function getProductsUsecase(limit: number, page: number) {
   const offset = (page - 1) * limit;
@@ -46,7 +47,7 @@ export async function fetchAndSaveProductsUsecase() {
     const existingProduct = await getProductBySKU(product.sku);
 
     if (!existingProduct) {
-      await createProduct({
+      await createProductWithTransaction({
         sku: product.sku,
         title: product.title,
         image: product.images[0],
