@@ -3,7 +3,7 @@
 ## Dependencies
 
 ```sh
-npm i fastify
+npm i fastify dotenv
 
 # dev deps
 npm i typescript tsx -D
