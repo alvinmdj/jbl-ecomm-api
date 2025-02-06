@@ -15,7 +15,7 @@ export async function getProducts(limit: number, offset: number) {
       FROM ${PRODUCT_TABLE} p
       LEFT JOIN ${TRANSACTION_TABLE} t ON p.sku = t.sku
       GROUP BY p.id
-      ORDER BY p.id
+      ORDER BY p.id DESC
       LIMIT $1 OFFSET $2
     `,
     [limit, offset]
