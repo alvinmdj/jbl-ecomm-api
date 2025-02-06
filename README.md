@@ -22,7 +22,24 @@ npm init -y
 npx tsc --init
 ```
 
-## Run dev (watch mode)
+## Run app
+
+- create & fill .env (using .env.example)
+
+- run postgresql with docker
+
+```sh
+# build & migrate
+docker-compose up --build
+
+# run detached mode
+docker-compose up -d
+
+# verify migration
+docker exec -it db-postgres psql -U postgres -d jbl_ecomm_db -c "\dt"
+```
+
+- run app (dev mode)
 
 ```sh
 npm run dev
