@@ -4,12 +4,19 @@ import {
   CreateTransactionResponse,
   TransactionResponse,
 } from "@/modules/adjustment-transactions/types";
+import { PRODUCT_TABLE } from "@/modules/products/repository";
 
 export const TRANSACTION_TABLE = "adjustment_transactions";
 
 export async function getTransactions(limit: number, offset: number) {
   return db.any<TransactionResponse>(
-    `SELECT * FROM ${TRANSACTION_TABLE} LIMIT $1 OFFSET $2`,
+    `
+      SELECT t.id, t.sku, t.qty, p.price * t.qty AS amount
+      FROM ${TRANSACTION_TABLE} t
+      LEFT JOIN ${PRODUCT_TABLE} p ON p.sku = t.sku
+      ORDER BY t.id DESC
+      LIMIT $1 OFFSET $2
+    `,
     [limit, offset]
   );
 }
@@ -23,7 +30,12 @@ export async function getTotalTransactionCount(): Promise<number> {
 
 export async function getTransactionById(id: number) {
   return db.oneOrNone<TransactionResponse>(
-    `SELECT * FROM ${TRANSACTION_TABLE} WHERE id = $1`,
+    `
+      SELECT t.*, p.price * t.qty AS amount
+      FROM ${TRANSACTION_TABLE} t
+      LEFT JOIN ${PRODUCT_TABLE} p ON p.sku = t.sku
+      WHERE t.id = $1
+    `,
     [id]
   );
 }
@@ -48,6 +60,6 @@ export async function updateTransaction(
   );
 }
 
-export async function deleteTransaction(id: string) {
+export async function deleteTransaction(id: number) {
   return db.none(`DELETE FROM ${TRANSACTION_TABLE} WHERE id = $1`, [id]);
 }

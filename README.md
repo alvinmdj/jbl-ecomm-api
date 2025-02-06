@@ -31,6 +31,8 @@ docker exec -it db-postgres psql -U postgres -d jbl_ecomm_db -c "\dt"
 
 ```sh
 npm run dev
+
+# server listening on http://localhost:4000
 ```
 
 ## Setup (personal notes)

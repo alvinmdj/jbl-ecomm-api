@@ -11,6 +11,6 @@ export type CreateTransactionResponse = CreateTransactionRequest;
 export type TransactionResponse = {
   id: number;
   sku: string;
-  quantity: number;
+  qty: number;
   amount: number;
 };
