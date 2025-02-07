@@ -21,11 +21,11 @@ import {
 import { SKU_ALREADY_EXISTS } from "@/utils/errors";
 
 export async function getProductsHandler(
-  request: FastifyRequest<{ Querystring: { limit?: number; page?: number } }>,
+  request: FastifyRequest<{ Querystring: { limit?: string; page?: string } }>,
   reply: FastifyReply
 ) {
-  const limit = request.query.limit || DEFAULT_PAGE_SIZE;
-  const page = request.query.page || DEFAULT_PAGE;
+  const limit = Number(request.query.limit) || DEFAULT_PAGE_SIZE;
+  const page = Number(request.query.page) || DEFAULT_PAGE;
 
   const { products, totalRecords } = await getProductsUsecase(limit, page);
 

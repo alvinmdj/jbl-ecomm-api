@@ -25,7 +25,7 @@ export async function getTotalTransactionCount(): Promise<number> {
   const result = await db.one(
     `SELECT COUNT(*) AS total FROM ${TRANSACTION_TABLE}`
   );
-  return result.total;
+  return +result.total;
 }
 
 export async function getTransactionById(id: number) {

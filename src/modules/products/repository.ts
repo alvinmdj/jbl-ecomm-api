@@ -24,7 +24,7 @@ export async function getProducts(limit: number, offset: number) {
 
 export async function getTotalProductCount(): Promise<number> {
   const result = await db.one(`SELECT COUNT(*) AS total FROM ${PRODUCT_TABLE}`);
-  return result.total;
+  return +result.total;
 }
 
 export async function getProductBySKU(sku: string) {

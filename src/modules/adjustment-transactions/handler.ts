@@ -19,11 +19,11 @@ import {
 import { INVALID_REQUEST_BODY, TRANSACTION_NOT_FOUND } from "@/utils/errors";
 
 export async function getTransactionsHandler(
-  request: FastifyRequest<{ Querystring: { limit?: number; page?: number } }>,
+  request: FastifyRequest<{ Querystring: { limit?: string; page?: string } }>,
   reply: FastifyReply
 ) {
-  const limit = request.query.limit || 10;
-  const page = request.query.page || DEFAULT_PAGE;
+  const limit = Number(request.query.limit) || 10;
+  const page = Number(request.query.page) || DEFAULT_PAGE;
 
   const { transactions, totalRecords } = await getTransactionsUsecase(
     limit,

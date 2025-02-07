@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import cors from "@fastify/cors";
 
 import { productsRoutes } from "@/modules/products/route";
 import { adjustmentTransactionsRoutes } from "@/modules/adjustment-transactions/route";
@@ -14,16 +15,24 @@ import {
 export async function buildServer() {
   const app = fastify();
 
+  // cors
+  await app.register(cors, {
+    // allow localhost port 3000 (web) to access this server
+    origin: ["http://localhost:3000"],
+  });
+
   // test route
   app.get("/", async () => {
     return { message: "Hello World" };
   });
 
+  // routes
   app.register(productsRoutes, { prefix: "/api/v1/products" });
   app.register(adjustmentTransactionsRoutes, {
     prefix: "/api/v1/adjustment-transactions",
   });
 
+  // error handler
   app.setErrorHandler((error, _, reply) => {
     const message = getErrorMessage(error);
 

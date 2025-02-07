@@ -1,6 +1,6 @@
 # Ecomm API
 
-## Run app
+## Getting started
 
 - install dependencies
 
@@ -8,16 +8,17 @@
 npm install
 ```
 
-- create & fill .env (using .env.example)
+- create & fill .env
 
 ```sh
+# fill .env with .env.example
 cp .env.example .env
 ```
 
 - run postgresql (using docker)
 
 ```sh
-# build & migrate
+# build & migrate init.sql
 docker-compose up --build
 
 # run detached mode
@@ -46,4 +47,7 @@ npm init -y
 
 # initialize tsconfig
 npx tsc --init
+
+# clean up docker (db)
+docker-compose down -v
 ```
