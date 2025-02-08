@@ -36,18 +36,66 @@ npm run dev
 # server listening on http://localhost:4000
 ```
 
-## Setup (personal notes)
+- run tests
 
 ```sh
-# initialize git
+npm run test
+```
+
+## Personal notes
+
+Initialize git:
+
+```sh
 git init
+```
 
-# initialize npm
+Initialize npm:
+
+```sh
 npm init -y
+```
 
-# initialize tsconfig
+Initialize tsconfig:
+
+```sh
 npx tsc --init
+```
 
-# clean up docker (db)
+Clean up docker (db):
+
+```sh
 docker-compose down -v
+```
+
+Setup test with jest & typescript ([jest](https://jestjs.io/docs/getting-started#via-ts-jest), [ts-jest](https://kulshekhar.github.io/ts-jest/docs/getting-started/installation)):
+
+```sh
+# install dependencies
+npm install --save-dev jest typescript ts-jest @types/jest
+
+# initialize jest config with ts-jest
+npx ts-jest config:init
+
+# path mapping from tsconfig to jest config
+# https://kulshekhar.github.io/ts-jest/docs/getting-started/paths-mapping
+
+# tsconfig.json (if paths configured like this)
+...
+"paths": { "@/*": ["./src/*"] },
+...
+
+# jest.config.js (add config based on tsconfig paths)
+...
+moduleNameMapper: {
+  "^@/(.*)$": "<rootDir>/src/$1",
+},
+...
+
+# add jest test script to package.json
+...
+"scripts": {
+  "test": "jest --watch"
+}
+...
 ```
