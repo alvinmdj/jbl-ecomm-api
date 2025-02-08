@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS products (
 );
 CREATE TABLE IF NOT EXISTS adjustment_transactions (
   "id" SERIAL PRIMARY KEY,
-  "sku" TEXT REFERENCES products(sku) ON DELETE CASCADE,
+  "sku" TEXT REFERENCES products(sku) ON DELETE CASCADE ON UPDATE CASCADE,
   "qty" BIGINT NOT NULL,
   "created_at" TIMESTAMP DEFAULT NOW()
 );
