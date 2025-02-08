@@ -34,13 +34,12 @@ export async function updateProductUsecase(
   sku: string,
   request: CreateProductRequest
 ) {
-  const product = await getProductBySKUUsecase(sku);
-
+  const product = await getProductBySKU(sku);
   if (!product) {
     throw new Error(PRODUCT_NOT_FOUND);
   }
 
-  const newProduct = await getProductBySKUUsecase(request.sku);
+  const newProduct = await getProductBySKU(request.sku);
   if (newProduct && newProduct.sku !== sku) {
     throw new Error(SKU_ALREADY_EXISTS);
   }

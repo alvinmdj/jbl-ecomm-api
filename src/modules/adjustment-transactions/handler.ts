@@ -41,12 +41,12 @@ export async function getTransactionsHandler(
 }
 
 export async function getTransactionByIDHandler(
-  request: FastifyRequest<{ Params: { id: number } }>,
+  request: FastifyRequest<{ Params: { id: string } }>,
   reply: FastifyReply
 ) {
   const { id } = request.params;
 
-  const transaction = await getTransactionByIDUsecase(id);
+  const transaction = await getTransactionByIDUsecase(+id);
   if (!transaction) {
     return reply.code(404).send({ message: TRANSACTION_NOT_FOUND });
   }

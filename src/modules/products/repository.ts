@@ -47,7 +47,7 @@ export async function createProduct({
   price,
   description,
 }: CreateProductRequest) {
-  return db.one<ProductDetailResponse>(
+  return db.one<Omit<ProductResponse, "stock">>(
     `INSERT INTO ${PRODUCT_TABLE} (title, sku, image, price, description) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
     [title, sku, image, price, description]
   );
@@ -57,7 +57,7 @@ export async function updateProduct(
   selectedSKU: string,
   { title, sku, image, price, description }: CreateProductRequest
 ) {
-  return db.one<ProductDetailResponse>(
+  return db.one<Omit<ProductResponse, "stock">>(
     `UPDATE ${PRODUCT_TABLE} SET sku = $1, title = $2, image = $3, price = $4, description = $5 WHERE sku = $6 RETURNING *`,
     [sku, title, image, price, description, selectedSKU]
   );
