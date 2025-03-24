@@ -53,12 +53,12 @@ export async function updateTransactionUsecase(
     throw new Error(TRANSACTION_NOT_FOUND);
   }
 
-  const isDifferentSKU = transaction.sku !== request.sku;
-
   const product = await getProductBySKUUsecase(request.sku);
   if (!product) {
     throw new Error(PRODUCT_NOT_FOUND);
   }
+
+  const isDifferentSKU = transaction.sku !== request.sku;
 
   if (isDifferentSKU) {
     // check new SKU product stock

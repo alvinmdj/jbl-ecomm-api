@@ -26,8 +26,8 @@ export async function getProductBySKUUsecase(sku: string) {
 }
 
 export async function createProductUsecase(request: CreateProductRequest) {
-  const { sku, title, description, image, price } = request;
-  return createProduct({ sku, title, description, image, price });
+  // const { sku, title, description, image, price } = request;
+  return createProduct(request);
 }
 
 export async function updateProductUsecase(
