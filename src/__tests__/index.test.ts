@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 
-import { buildServer } from "@/utils/server";
+import { buildServer } from "@/utils/server.js";
 
 describe("GET / endpoint", () => {
   let app: FastifyInstance;

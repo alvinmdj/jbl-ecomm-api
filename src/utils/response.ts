@@ -1,4 +1,4 @@
-import { Pagination } from "@/utils/pagination";
+import { Pagination } from "@/utils/pagination.js";
 
 export function createAPIResponse<T>({
   data,

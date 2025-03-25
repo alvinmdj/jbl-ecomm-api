@@ -7,7 +7,7 @@ import {
   getProductBySKUHandler,
   getProductsHandler,
   updateProductHandler,
-} from "@/modules/products/handler";
+} from "@/modules/products/handler.js";
 
 export async function productsRoutes(app: FastifyInstance) {
   app.get("/", getProductsHandler);

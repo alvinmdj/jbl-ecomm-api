@@ -1,6 +1,6 @@
 import pgPromise from "pg-promise";
 
-import { env } from "@/configs/env";
+import { env } from "@/configs/env.js";
 
 const pgp = pgPromise();
 

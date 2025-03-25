@@ -1,5 +1,5 @@
-import { env } from "@/configs/env";
-import { buildServer } from "@/utils/server";
+import { env } from "@/configs/env.js";
+import { buildServer } from "@/utils/server.js";
 
 async function gracefulShutdown({
   app,

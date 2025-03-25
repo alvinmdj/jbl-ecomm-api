@@ -6,10 +6,10 @@ import {
   getProducts,
   getTotalProductCount,
   updateProduct,
-} from "@/modules/products/repository";
-import { CreateProductRequest } from "@/modules/products/types";
-import { getDummyProducts } from "@/utils/dummy-products";
-import { PRODUCT_NOT_FOUND, SKU_ALREADY_EXISTS } from "@/utils/errors";
+} from "@/modules/products/repository.js";
+import { CreateProductRequest } from "@/modules/products/types.js";
+import { getDummyProducts } from "@/utils/dummy-products.js";
+import { PRODUCT_NOT_FOUND, SKU_ALREADY_EXISTS } from "@/utils/errors.js";
 
 export async function getProductsUsecase(limit: number, page: number) {
   const offset = (page - 1) * limit;

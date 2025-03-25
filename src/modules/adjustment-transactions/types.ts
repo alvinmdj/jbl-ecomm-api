@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { createTransactionBodySchema } from "@/modules/adjustment-transactions/schema";
+import { createTransactionBodySchema } from "@/modules/adjustment-transactions/schema.js";
 
 export type CreateTransactionRequest = z.infer<
   typeof createTransactionBodySchema

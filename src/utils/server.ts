@@ -2,8 +2,8 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import { JsonSchemaToTsProvider } from "@fastify/type-provider-json-schema-to-ts";
 
-import { productsRoutes } from "@/modules/products/route";
-import { adjustmentTransactionsRoutes } from "@/modules/adjustment-transactions/route";
+import { productsRoutes } from "@/modules/products/route.js";
+import { adjustmentTransactionsRoutes } from "@/modules/adjustment-transactions/route.js";
 
 import {
   getErrorMessage,
@@ -11,7 +11,7 @@ import {
   PRODUCT_NOT_FOUND,
   SKU_ALREADY_EXISTS,
   TRANSACTION_NOT_FOUND,
-} from "@/utils/errors";
+} from "@/utils/errors.js";
 import {
   response200Schema,
   response400Schema,
@@ -19,7 +19,7 @@ import {
   testBodySchema,
   testParamsSchema,
   testQsSchema,
-} from "@/utils/experimental/json-schemas";
+} from "@/utils/experimental/json-schemas.js";
 
 export async function buildServer() {
   const app = fastify().withTypeProvider<JsonSchemaToTsProvider>();

@@ -1,18 +1,18 @@
 import { FastifyInstance } from "fastify";
 
-import * as productsUsecase from "@/modules/products/usecase";
+import * as productsUsecase from "@/modules/products/usecase.js";
 
-import { buildServer } from "@/utils/server";
+import { buildServer } from "@/utils/server.js";
 import {
   calculateTotalPage,
   DEFAULT_PAGE,
   DEFAULT_PAGE_SIZE,
-} from "@/utils/pagination";
+} from "@/utils/pagination.js";
 import {
   INVALID_REQUEST_BODY,
   PRODUCT_NOT_FOUND,
   SKU_ALREADY_EXISTS,
-} from "@/utils/errors";
+} from "@/utils/errors.js";
 
 const apiPath = "/api/v1/products";
 

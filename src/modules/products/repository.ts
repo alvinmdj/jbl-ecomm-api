@@ -1,11 +1,11 @@
-import { db } from "@/db";
-import { TRANSACTION_TABLE } from "@/modules/adjustment-transactions/repository";
+import { db } from "@/db/index.js";
+import { TRANSACTION_TABLE } from "@/modules/adjustment-transactions/repository.js";
 import {
   CreateProductRequest,
   CreateProductWithStockRequest,
   ProductDetailResponse,
   ProductResponse,
-} from "@/modules/products/types";
+} from "@/modules/products/types.js";
 
 export const PRODUCT_TABLE = "products";
 
