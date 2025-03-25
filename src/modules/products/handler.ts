@@ -1,6 +1,6 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+import type { FastifyReply, FastifyRequest } from "fastify";
 
-import { CreateProductRequest } from "@/modules/products/types.js";
+import type { CreateProductRequest } from "@/modules/products/types.js";
 import {
   createProductUsecase,
   deleteProductUsecase,
@@ -16,7 +16,7 @@ import {
   calculateTotalPage,
   DEFAULT_PAGE,
   DEFAULT_PAGE_SIZE,
-  Pagination,
+  type Pagination,
 } from "@/utils/pagination.js";
 import { SKU_ALREADY_EXISTS } from "@/utils/errors.js";
 

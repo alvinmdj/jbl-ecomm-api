@@ -6,7 +6,7 @@ import {
   getTransactions,
   updateTransaction,
 } from "@/modules/adjustment-transactions/repository.js";
-import { CreateTransactionRequest } from "@/modules/adjustment-transactions/types.js";
+import type { CreateTransactionRequest } from "@/modules/adjustment-transactions/types.js";
 import { getProductBySKUUsecase } from "@/modules/products/usecase.js";
 import {
   INSUFFICIENT_PRODUCT_STOCK,

@@ -1,6 +1,6 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
-import { JsonSchemaToTsProvider } from "@fastify/type-provider-json-schema-to-ts";
+import type { JsonSchemaToTsProvider } from "@fastify/type-provider-json-schema-to-ts";
 
 import { productsRoutes } from "@/modules/products/route.js";
 import { adjustmentTransactionsRoutes } from "@/modules/adjustment-transactions/route.js";

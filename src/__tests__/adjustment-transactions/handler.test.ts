@@ -1,4 +1,4 @@
-import { FastifyInstance } from "fastify";
+import type { FastifyInstance } from "fastify";
 
 import * as adjustmentTransactionsUsecase from "@/modules/adjustment-transactions/usecase.js";
 

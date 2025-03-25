@@ -1,7 +1,7 @@
 import * as productsRepository from "@/modules/products/repository.js";
 import * as dummyProducts from "@/utils/dummy-products.js";
 
-import { ProductResponse } from "@/modules/products/types.js";
+import type { ProductResponse } from "@/modules/products/types.js";
 import {
   createProductUsecase,
   deleteProductUsecase,

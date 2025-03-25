@@ -1,4 +1,4 @@
-import { FastifyInstance } from "fastify";
+import type { FastifyInstance } from "fastify";
 
 import * as productsUsecase from "@/modules/products/usecase.js";
 

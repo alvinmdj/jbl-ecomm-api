@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+import type { FastifyReply, FastifyRequest } from "fastify";
 
 import {
   createTransactionUsecase,
@@ -8,13 +8,13 @@ import {
   updateTransactionUsecase,
 } from "@/modules/adjustment-transactions/usecase.js";
 import { createTransactionBodySchema } from "@/modules/adjustment-transactions/schema.js";
-import { CreateTransactionRequest } from "@/modules/adjustment-transactions/types.js";
+import type { CreateTransactionRequest } from "@/modules/adjustment-transactions/types.js";
 
 import { createAPIResponse } from "@/utils/response.js";
 import {
   DEFAULT_PAGE,
   calculateTotalPage,
-  Pagination,
+  type Pagination,
 } from "@/utils/pagination.js";
 import { INVALID_REQUEST_BODY, TRANSACTION_NOT_FOUND } from "@/utils/errors.js";
 

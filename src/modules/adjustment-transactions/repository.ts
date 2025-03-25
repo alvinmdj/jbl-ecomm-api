@@ -1,5 +1,5 @@
 import { db } from "@/db/index.js";
-import {
+import type {
   CreateTransactionRequest,
   CreateTransactionResponse,
   TransactionResponse,

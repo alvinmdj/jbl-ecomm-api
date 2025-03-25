@@ -7,7 +7,7 @@ import {
   getTotalProductCount,
   updateProduct,
 } from "@/modules/products/repository.js";
-import { CreateProductRequest } from "@/modules/products/types.js";
+import type { CreateProductRequest } from "@/modules/products/types.js";
 import { getDummyProducts } from "@/utils/dummy-products.js";
 import { PRODUCT_NOT_FOUND, SKU_ALREADY_EXISTS } from "@/utils/errors.js";
 

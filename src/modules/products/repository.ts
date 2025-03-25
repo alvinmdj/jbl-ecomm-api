@@ -1,6 +1,6 @@
 import { db } from "@/db/index.js";
 import { TRANSACTION_TABLE } from "@/modules/adjustment-transactions/repository.js";
-import {
+import type {
   CreateProductRequest,
   CreateProductWithStockRequest,
   ProductDetailResponse,
