@@ -268,7 +268,7 @@ describe("deleteTransactionUsecase", () => {
       .spyOn(adjustmentTransactionsRepository, "getTransactionById")
       .mockResolvedValue(mockTransaction);
 
-    const mockGetProductBySKUUsecase = jest
+    jest
       .spyOn(productsUsecase, "getProductBySKUUsecase")
       .mockResolvedValue(mockProduct);
 
