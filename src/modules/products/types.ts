@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { createProductBodySchema } from "@/modules/products/schema";
+import { createProductBodySchema } from "@/modules/products/schema.js";
 
 export type CreateProductRequest = z.infer<typeof createProductBodySchema>;
 

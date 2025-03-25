@@ -1,7 +1,7 @@
-import * as productsRepository from "@/modules/products/repository";
-import * as dummyProducts from "@/utils/dummy-products";
+import * as productsRepository from "@/modules/products/repository.js";
+import * as dummyProducts from "@/utils/dummy-products.js";
 
-import { ProductResponse } from "@/modules/products/types";
+import type { ProductResponse } from "@/modules/products/types.js";
 import {
   createProductUsecase,
   deleteProductUsecase,
@@ -9,8 +9,8 @@ import {
   getProductBySKUUsecase,
   getProductsUsecase,
   updateProductUsecase,
-} from "@/modules/products/usecase";
-import { PRODUCT_NOT_FOUND, SKU_ALREADY_EXISTS } from "@/utils/errors";
+} from "@/modules/products/usecase.js";
+import { PRODUCT_NOT_FOUND, SKU_ALREADY_EXISTS } from "@/utils/errors.js";
 
 describe("getProductsUsecase", () => {
   beforeEach(() => {

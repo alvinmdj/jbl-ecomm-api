@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+import type { FastifyReply, FastifyRequest } from "fastify";
 
 import {
   createTransactionUsecase,
@@ -6,17 +6,17 @@ import {
   getTransactionByIDUsecase,
   getTransactionsUsecase,
   updateTransactionUsecase,
-} from "@/modules/adjustment-transactions/usecase";
-import { createTransactionBodySchema } from "@/modules/adjustment-transactions/schema";
-import { CreateTransactionRequest } from "@/modules/adjustment-transactions/types";
+} from "@/modules/adjustment-transactions/usecase.js";
+import { createTransactionBodySchema } from "@/modules/adjustment-transactions/schema.js";
+import type { CreateTransactionRequest } from "@/modules/adjustment-transactions/types.js";
 
-import { createAPIResponse } from "@/utils/response";
+import { createAPIResponse } from "@/utils/response.js";
 import {
   DEFAULT_PAGE,
   calculateTotalPage,
-  Pagination,
-} from "@/utils/pagination";
-import { INVALID_REQUEST_BODY, TRANSACTION_NOT_FOUND } from "@/utils/errors";
+  type Pagination,
+} from "@/utils/pagination.js";
+import { INVALID_REQUEST_BODY, TRANSACTION_NOT_FOUND } from "@/utils/errors.js";
 
 export async function getTransactionsHandler(
   request: FastifyRequest<{ Querystring: { limit?: string; page?: string } }>,

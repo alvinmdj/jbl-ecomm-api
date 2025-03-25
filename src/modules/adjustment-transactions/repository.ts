@@ -1,10 +1,10 @@
-import { db } from "@/db";
-import {
+import { db } from "@/db/index.js";
+import type {
   CreateTransactionRequest,
   CreateTransactionResponse,
   TransactionResponse,
-} from "@/modules/adjustment-transactions/types";
-import { PRODUCT_TABLE } from "@/modules/products/repository";
+} from "@/modules/adjustment-transactions/types.js";
+import { PRODUCT_TABLE } from "@/modules/products/repository.js";
 
 export const TRANSACTION_TABLE = "adjustment_transactions";
 

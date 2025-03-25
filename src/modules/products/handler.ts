@@ -1,6 +1,6 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+import type { FastifyReply, FastifyRequest } from "fastify";
 
-import { CreateProductRequest } from "@/modules/products/types";
+import type { CreateProductRequest } from "@/modules/products/types.js";
 import {
   createProductUsecase,
   deleteProductUsecase,
@@ -8,17 +8,17 @@ import {
   getProductBySKUUsecase,
   getProductsUsecase,
   updateProductUsecase,
-} from "@/modules/products/usecase";
-import { createProductBodySchema } from "@/modules/products/schema";
+} from "@/modules/products/usecase.js";
+import { createProductBodySchema } from "@/modules/products/schema.js";
 
-import { createAPIResponse } from "@/utils/response";
+import { createAPIResponse } from "@/utils/response.js";
 import {
   calculateTotalPage,
   DEFAULT_PAGE,
   DEFAULT_PAGE_SIZE,
-  Pagination,
-} from "@/utils/pagination";
-import { SKU_ALREADY_EXISTS } from "@/utils/errors";
+  type Pagination,
+} from "@/utils/pagination.js";
+import { SKU_ALREADY_EXISTS } from "@/utils/errors.js";
 
 export async function getProductsHandler(
   request: FastifyRequest<{ Querystring: { limit?: string; page?: string } }>,

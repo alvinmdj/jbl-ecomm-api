@@ -5,14 +5,14 @@ import {
   getTransactionById,
   getTransactions,
   updateTransaction,
-} from "@/modules/adjustment-transactions/repository";
-import { CreateTransactionRequest } from "@/modules/adjustment-transactions/types";
-import { getProductBySKUUsecase } from "@/modules/products/usecase";
+} from "@/modules/adjustment-transactions/repository.js";
+import type { CreateTransactionRequest } from "@/modules/adjustment-transactions/types.js";
+import { getProductBySKUUsecase } from "@/modules/products/usecase.js";
 import {
   INSUFFICIENT_PRODUCT_STOCK,
   PRODUCT_NOT_FOUND,
   TRANSACTION_NOT_FOUND,
-} from "@/utils/errors";
+} from "@/utils/errors.js";
 
 export async function getTransactionsUsecase(limit: number, page: number) {
   const offset = (page - 1) * limit;

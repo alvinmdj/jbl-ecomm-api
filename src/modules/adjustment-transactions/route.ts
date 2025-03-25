@@ -6,7 +6,7 @@ import {
   getTransactionByIDHandler,
   getTransactionsHandler,
   updateTransactionHandler,
-} from "@/modules/adjustment-transactions/handler";
+} from "@/modules/adjustment-transactions/handler.js";
 
 export async function adjustmentTransactionsRoutes(app: FastifyInstance) {
   app.get("/", getTransactionsHandler);

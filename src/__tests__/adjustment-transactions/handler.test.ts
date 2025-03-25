@@ -1,10 +1,10 @@
-import { FastifyInstance } from "fastify";
+import type { FastifyInstance } from "fastify";
 
-import * as adjustmentTransactionsUsecase from "@/modules/adjustment-transactions/usecase";
+import * as adjustmentTransactionsUsecase from "@/modules/adjustment-transactions/usecase.js";
 
-import { buildServer } from "@/utils/server";
-import { calculateTotalPage, DEFAULT_PAGE } from "@/utils/pagination";
-import { TRANSACTION_NOT_FOUND } from "@/utils/errors";
+import { buildServer } from "@/utils/server.js";
+import { calculateTotalPage, DEFAULT_PAGE } from "@/utils/pagination.js";
+import { TRANSACTION_NOT_FOUND } from "@/utils/errors.js";
 
 const apiPath = "/api/v1/adjustment-transactions";
 

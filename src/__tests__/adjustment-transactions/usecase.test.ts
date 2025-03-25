@@ -1,5 +1,5 @@
-import * as adjustmentTransactionsRepository from "@/modules/adjustment-transactions/repository";
-import * as productsUsecase from "@/modules/products/usecase";
+import * as adjustmentTransactionsRepository from "@/modules/adjustment-transactions/repository.js";
+import * as productsUsecase from "@/modules/products/usecase.js";
 
 import {
   createTransactionUsecase,
@@ -7,12 +7,12 @@ import {
   getTransactionByIDUsecase,
   getTransactionsUsecase,
   updateTransactionUsecase,
-} from "@/modules/adjustment-transactions/usecase";
+} from "@/modules/adjustment-transactions/usecase.js";
 import {
   PRODUCT_NOT_FOUND,
   INSUFFICIENT_PRODUCT_STOCK,
   TRANSACTION_NOT_FOUND,
-} from "@/utils/errors";
+} from "@/utils/errors.js";
 
 describe("getTransactionsUsecase", () => {
   beforeEach(() => {
@@ -268,7 +268,7 @@ describe("deleteTransactionUsecase", () => {
       .spyOn(adjustmentTransactionsRepository, "getTransactionById")
       .mockResolvedValue(mockTransaction);
 
-    const mockGetProductBySKUUsecase = jest
+    jest
       .spyOn(productsUsecase, "getProductBySKUUsecase")
       .mockResolvedValue(mockProduct);
 
